@@ -71,6 +71,7 @@ class GameViewController: UIViewController {
                 }
             }
         }
+        letterToGuess.text = ""
         displayWord()
     }
     
@@ -80,12 +81,15 @@ class GameViewController: UIViewController {
             if !wrongGuesses.contains(String(guess!)) && !(setOfWordCharacters.contains(guess!)) {
                 print(guess)
                 wrongGuesses.insert(String(guess!))
-                death++
+                if death < 7 {
+                    death++
+                }
                 let imageName = "hangman" + String(death) + ".gif"
                 hangman.image = UIImage(named: imageName)
             }
         }
         incorrectGuessList.text = String(wrongGuesses)
+        letterToGuess.text = ""
         
     }
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
