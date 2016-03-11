@@ -10,21 +10,93 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var incorrectGuessList: UILabel!
+    @IBOutlet weak var incorrectButton: UIButton!
+    @IBOutlet weak var correctButton: UIButton!
+    @IBOutlet weak var letterToGuess: UITextField!
+    @IBOutlet weak var wordToGuess: UILabel!
+    @IBOutlet weak var hangman: UIImageView!
+    var phrase : String?
+    var phraseArray : [Character]?
+    var phraseLength : Int?
+    var arrayOfBools : [Bool]?
+    var setOfWordCharacters = Set<String>()
+    var wrongGuesses = Set<String>()
+    var death = 1
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         let hangmanPhrases = HangmanPhrases()
-        var phrase = hangmanPhrases.getRandomPhrase()
+        phrase = hangmanPhrases.getRandomPhrase()
+        phraseArray = [Character](phrase!.characters)
+        phraseLength = phrase!.characters.count
         print(phrase)
+        arrayOfBools = [Bool](count: phraseLength!, repeatedValue: false)
+        for c in phraseArray! {
+            setOfWordCharacters.insert(String(c))
+            
+        }
+        displayWord()
     }
 
+    func displayWord() {
+        wordToGuess.text = ""
+        for index in 0...phraseLength!-1 {
+            if arrayOfBools![index] {
+                 wordToGuess.text = wordToGuess.text! + String(phraseArray![index]) + " "
+            } else {
+                 wordToGuess.text = wordToGuess.text! + "- "
+            }
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    func isCorrectGuess(guess: String) {
+        
+    }
+    @IBAction func correctGuessMade(sender: AnyObject){
+        let guess = letterToGuess.text
 
+        if guess!.characters.count == 1 {
+            if (setOfWordCharacters.contains(guess!)) {
+                                    print(guess)
+                for index in 0...phraseLength!-1 {
+                    if guess == String(phraseArray![index]) {
+                        arrayOfBools![index] = true
+                        print("true")
+                    }
+                }
+            }
+        }
+        displayWord()
+    }
+    
+    @IBAction func incorrectGuessMade(sender: AnyObject) {
+        let guess = letterToGuess.text
+        if guess!.characters.count == 1 {
+            if !wrongGuesses.contains(String(guess!)) && !(setOfWordCharacters.contains(guess!)) {
+                print(guess)
+                wrongGuesses.insert(String(guess!))
+                death++
+                let imageName = "hangman" + String(death) + ".gif"
+                hangman.image = UIImage(named: imageName)
+            }
+        }
+        incorrectGuessList.text = String(wrongGuesses)
+        
+    }
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    
     /*
     // MARK: - Navigation
 
