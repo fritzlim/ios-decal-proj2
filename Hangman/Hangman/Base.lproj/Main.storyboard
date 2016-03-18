@@ -64,25 +64,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="fillEqually" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="ZMd-CZ-Fyd">
-                                <rect key="frame" x="207" y="433" width="274" height="30"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xax-42-eC5">
-                                        <rect key="frame" x="0.0" y="0.0" width="62" height="30"/>
-                                        <state key="normal" title="Correct"/>
-                                        <connections>
-                                            <action selector="correctGuessMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Gnx-cx-qV0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRe-Yx-mi1">
-                                        <rect key="frame" x="212" y="0.0" width="62" height="30"/>
-                                        <state key="normal" title="Incorrect"/>
-                                        <connections>
-                                            <action selector="incorrectGuessMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gUL-n5-LU3"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="hangman1.gif" translatesAutoresizingMaskIntoConstraints="NO" id="hpw-Xh-GI4">
                                 <rect key="frame" x="224" y="106" width="240" height="128"/>
                             </imageView>
@@ -98,10 +79,23 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Vi-R9-a9q">
-                                <rect key="frame" x="296" y="348" width="168" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUj-bh-UOo">
+                                <rect key="frame" x="322" y="386" width="43" height="30"/>
+                                <state key="normal" title="Guess"/>
+                                <connections>
+                                    <action selector="guessMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kcv-5e-QTZ"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Vi-R9-a9q">
+                                <rect key="frame" x="300" y="348" width="300" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="wpC-KT-h6f"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                                <connections>
+                                    <action selector="typingInText:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="5ha-U8-XX7"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -111,11 +105,12 @@
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8nF-iq-CZK"/>
                             <constraint firstItem="Ubh-p5-HPZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="D3x-T6-Beg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ax3-a1-pdv" secondAttribute="bottom" constant="30" id="GhM-fO-aRf"/>
+                            <constraint firstItem="gAe-MB-s15" firstAttribute="top" secondItem="TUj-bh-UOo" secondAttribute="bottom" constant="84" id="Lvd-ch-Q7z"/>
                             <constraint firstItem="gAe-MB-s15" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NDo-Lc-myj"/>
                             <constraint firstItem="gAe-MB-s15" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S9W-qG-NFF"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ZMd-CZ-Fyd" secondAttribute="bottom" constant="137" id="VLF-Sb-pAR"/>
                             <constraint firstItem="ax3-a1-pdv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VTi-Fa-iy1"/>
                             <constraint firstItem="9Vi-R9-a9q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vbv-mq-YID"/>
+                            <constraint firstItem="TUj-bh-UOo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zd0-qs-SDk"/>
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="agV-sf-fjf"/>
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="42" id="aqP-E3-J0M"/>
                             <constraint firstItem="9Vi-R9-a9q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cIP-1n-26X"/>
@@ -124,7 +119,6 @@
                             <constraint firstItem="Ubh-p5-HPZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kic-yD-QEh"/>
                             <constraint firstItem="Ubh-p5-HPZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="219" id="o5W-U1-KHQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9Vi-R9-a9q" secondAttribute="bottom" constant="222" id="smA-Ya-VqI"/>
-                            <constraint firstItem="ZMd-CZ-Fyd" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="z7b-kt-E7D"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -139,9 +133,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="z8x-cc-ffJ"/>
                     <connections>
-                        <outlet property="correctButton" destination="Xax-42-eC5" id="TMT-zK-XK2"/>
+                        <outlet property="guessButton" destination="TUj-bh-UOo" id="fwq-Cx-gxc"/>
                         <outlet property="hangman" destination="hpw-Xh-GI4" id="TfB-Zh-Bci"/>
-                        <outlet property="incorrectButton" destination="cRe-Yx-mi1" id="aTh-Gh-Abz"/>
                         <outlet property="incorrectGuessList" destination="ax3-a1-pdv" id="hlm-Ar-JOm"/>
                         <outlet property="letterToGuess" destination="9Vi-R9-a9q" id="2nc-vG-KhF"/>
                         <outlet property="wordToGuess" destination="Ubh-p5-HPZ" id="k8U-s2-iZx"/>

@@ -10,9 +10,8 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    @IBOutlet weak var guessButton: UIButton!
     @IBOutlet weak var incorrectGuessList: UILabel!
-    @IBOutlet weak var incorrectButton: UIButton!
-    @IBOutlet weak var correctButton: UIButton!
     @IBOutlet weak var letterToGuess: UITextField!
     @IBOutlet weak var wordToGuess: UILabel!
     @IBOutlet weak var hangman: UIImageView!
@@ -37,9 +36,20 @@ class GameViewController: UIViewController {
             setOfWordCharacters.insert(String(c))
             
         }
+        for index in 0...phraseLength!-1 {
+            if (String(phraseArray![index]) == " ") {
+                arrayOfBools![index] = true
+                print("true")
+            }
+        }
         displayWord()
     }
 
+    @IBAction func typingInText(sender: AnyObject) {
+        if letterToGuess.text!.characters.count > 2 {
+            letterToGuess.text = ""
+        }
+    }
     func displayWord() {
         wordToGuess.text = ""
         for index in 0...phraseLength!-1 {
@@ -57,17 +67,52 @@ class GameViewController: UIViewController {
     func isCorrectGuess(guess: String) {
         
     }
-    @IBAction func correctGuessMade(sender: AnyObject){
+    @IBAction func guessMade(sender: AnyObject) {
         let guess = letterToGuess.text
-
+        
         if guess!.characters.count == 1 {
             if (setOfWordCharacters.contains(guess!)) {
-                                    print(guess)
+                print(guess)
                 for index in 0...phraseLength!-1 {
                     if guess == String(phraseArray![index]) {
                         arrayOfBools![index] = true
                         print("true")
                     }
+                }
+                if (testIfWon()) {
+                    print("testing if won")
+                    let alertController = UIAlertController(
+                        title: "Congratulations! You Won!",
+                        message: "Do you want to play a new game?",
+                        preferredStyle: .Alert)
+                    
+//                    let newGameAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
+//                        if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+//                            UIApplication.sharedApplication().openURL(url)
+//                        }
+//                    }
+                    let newGameAction = UIAlertAction(title: "Yes", style: .Default) {
+                        action in self.reset()
+                    }
+                    alertController.addAction(newGameAction)
+                    
+                    let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
+                    alertController.addAction(noAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+            }
+            else {
+                if !wrongGuesses.contains(String(guess!)) {
+                    print(guess)
+                    wrongGuesses.insert(String(guess!))
+                    if death < 7 {
+                        death++
+                    }
+                    let imageName = "hangman" + String(death) + ".gif"
+                    hangman.image = UIImage(named: imageName)
+                    incorrectGuessList.text = String(wrongGuesses)
                 }
             }
         }
@@ -75,23 +120,32 @@ class GameViewController: UIViewController {
         displayWord()
     }
     
-    @IBAction func incorrectGuessMade(sender: AnyObject) {
-        let guess = letterToGuess.text
-        if guess!.characters.count == 1 {
-            if !wrongGuesses.contains(String(guess!)) && !(setOfWordCharacters.contains(guess!)) {
-                print(guess)
-                wrongGuesses.insert(String(guess!))
-                if death < 7 {
-                    death++
-                }
-                let imageName = "hangman" + String(death) + ".gif"
-                hangman.image = UIImage(named: imageName)
+    func reset() {
+        print("asdf")
+        self.setOfWordCharacters = Set<String>()
+        self.wrongGuesses = Set<String>()
+        self.death = 1
+        let hangmanPhrases = HangmanPhrases()
+        self.phrase = hangmanPhrases.getRandomPhrase()
+        self.phraseArray = [Character](self.phrase!.characters)
+        self.phraseLength = self.phrase!.characters.count
+        print(self.phrase)
+        self.arrayOfBools = [Bool](count: self.phraseLength!, repeatedValue: false)
+        for c in self.phraseArray! {
+            self.setOfWordCharacters.insert(String(c))
+            
+        }
+        self.displayWord()
+    }
+    func testIfWon() -> Bool{
+        for x in arrayOfBools! {
+            if (x == false) {
+                return false
             }
         }
-        incorrectGuessList.text = String(wrongGuesses)
-        letterToGuess.text = ""
-        
+        return true
     }
+
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
