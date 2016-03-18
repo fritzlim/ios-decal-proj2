@@ -67,6 +67,9 @@ class GameViewController: UIViewController {
     func isCorrectGuess(guess: String) {
         
     }
+    @IBAction func newGameRequested(sender: AnyObject) {
+        reset()
+    }
     @IBAction func guessMade(sender: AnyObject) {
         let guess = letterToGuess.text
         
@@ -83,22 +86,12 @@ class GameViewController: UIViewController {
                     print("testing if won")
                     let alertController = UIAlertController(
                         title: "Congratulations! You Won!",
-                        message: "Do you want to play a new game?",
+                        message: "Let's play a new game",
                         preferredStyle: .Alert)
-                    
-//                    let newGameAction = UIAlertAction(title: "Open Settings", style: .Default) { (action) in
-//                        if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-//                            UIApplication.sharedApplication().openURL(url)
-//                        }
-//                    }
-                    let newGameAction = UIAlertAction(title: "Yes", style: .Default) {
+                    let newGameAction = UIAlertAction(title: "OK", style: .Default) {
                         action in self.reset()
                     }
                     alertController.addAction(newGameAction)
-                    
-                    let noAction = UIAlertAction(title: "No", style: .Cancel, handler: nil)
-                    alertController.addAction(noAction)
-                    
                     self.presentViewController(alertController, animated: true, completion: nil)
                 }
                 
@@ -109,9 +102,20 @@ class GameViewController: UIViewController {
                     wrongGuesses.insert(String(guess!))
                     if death < 7 {
                         death++
+                        let imageName = "hangman" + String(death) + ".gif"
+                        hangman.image = UIImage(named: imageName)
                     }
-                    let imageName = "hangman" + String(death) + ".gif"
-                    hangman.image = UIImage(named: imageName)
+                    if death > 6{
+                        let alertController = UIAlertController(
+                            title: "You Lost!",
+                            message: "Let's try again",
+                            preferredStyle: .Alert)
+                        let newGameAction = UIAlertAction(title: "OK", style: .Default) {
+                            action in self.reset()
+                        }
+                        alertController.addAction(newGameAction)
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                    }
                     incorrectGuessList.text = String(wrongGuesses)
                 }
             }
@@ -122,6 +126,7 @@ class GameViewController: UIViewController {
     
     func reset() {
         print("asdf")
+        self.wordToGuess.text = ""
         self.setOfWordCharacters = Set<String>()
         self.wrongGuesses = Set<String>()
         self.death = 1
@@ -135,6 +140,9 @@ class GameViewController: UIViewController {
             self.setOfWordCharacters.insert(String(c))
             
         }
+        let imageName = "hangman" + String(death) + ".gif"
+        hangman.image = UIImage(named: imageName)
+        incorrectGuessList.text = ""
         self.displayWord()
     }
     func testIfWon() -> Bool{

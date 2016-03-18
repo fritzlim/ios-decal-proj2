@@ -19,9 +19,11 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Hangman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-5Z-ysm">
                                 <rect key="frame" x="227" y="113" width="234" height="125"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="35"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.50196081400000003" green="0.0" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DrE-rB-7Ez">
                                 <rect key="frame" x="241" y="363" width="144" height="48"/>
@@ -79,13 +81,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUj-bh-UOo">
-                                <rect key="frame" x="322" y="386" width="43" height="30"/>
-                                <state key="normal" title="Guess"/>
-                                <connections>
-                                    <action selector="guessMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kcv-5e-QTZ"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Vi-R9-a9q">
                                 <rect key="frame" x="300" y="348" width="300" height="30"/>
                                 <constraints>
@@ -97,6 +92,25 @@
                                     <action selector="typingInText:" destination="BYZ-38-t0r" eventType="editingDidEnd" id="5ha-U8-XX7"/>
                                 </connections>
                             </textField>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" spacing="55" translatesAutoresizingMaskIntoConstraints="NO" id="rLL-ya-bJu">
+                                <rect key="frame" x="252" y="409" width="173" height="30"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sFj-FG-zEj">
+                                        <rect key="frame" x="0.0" y="0.0" width="75" height="30"/>
+                                        <state key="normal" title="New Game"/>
+                                        <connections>
+                                            <action selector="newGameRequested:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L79-Kj-FIf"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TUj-bh-UOo">
+                                        <rect key="frame" x="130" y="0.0" width="43" height="30"/>
+                                        <state key="normal" title="Guess"/>
+                                        <connections>
+                                            <action selector="guessMade:" destination="BYZ-38-t0r" eventType="touchUpInside" id="kcv-5e-QTZ"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -105,20 +119,20 @@
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8nF-iq-CZK"/>
                             <constraint firstItem="Ubh-p5-HPZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="D3x-T6-Beg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="ax3-a1-pdv" secondAttribute="bottom" constant="30" id="GhM-fO-aRf"/>
-                            <constraint firstItem="gAe-MB-s15" firstAttribute="top" secondItem="TUj-bh-UOo" secondAttribute="bottom" constant="84" id="Lvd-ch-Q7z"/>
                             <constraint firstItem="gAe-MB-s15" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NDo-Lc-myj"/>
                             <constraint firstItem="gAe-MB-s15" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="S9W-qG-NFF"/>
                             <constraint firstItem="ax3-a1-pdv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="VTi-Fa-iy1"/>
                             <constraint firstItem="9Vi-R9-a9q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Vbv-mq-YID"/>
-                            <constraint firstItem="TUj-bh-UOo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Zd0-qs-SDk"/>
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="agV-sf-fjf"/>
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="42" id="aqP-E3-J0M"/>
                             <constraint firstItem="9Vi-R9-a9q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="cIP-1n-26X"/>
                             <constraint firstItem="hpw-Xh-GI4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="42" id="fn6-DQ-cUF"/>
                             <constraint firstItem="9Vi-R9-a9q" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="hs1-Y3-uhB"/>
                             <constraint firstItem="Ubh-p5-HPZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="kic-yD-QEh"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="rLL-ya-bJu" secondAttribute="bottom" constant="161" id="ljT-Zb-Kai"/>
                             <constraint firstItem="Ubh-p5-HPZ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="219" id="o5W-U1-KHQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="9Vi-R9-a9q" secondAttribute="bottom" constant="222" id="smA-Ya-VqI"/>
+                            <constraint firstItem="rLL-ya-bJu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sxg-de-vMD"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
